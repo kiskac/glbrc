@@ -1,0 +1,18 @@
+<h1>Welcome <%= @user.login %></h1>
+
+<ul id="sortable" class="list-group" data-url="<%= sort_users_path %>">
+  <% @apps.each do |app| %>
+      <li id="<%= dom_id(app)%>" style="border: 1px solid <%= app.color %>" class="visible_<%= app.default_status %>">
+        <a href="<%= app.link %>" style="color: <%= app.color %>">
+          <h2><%= app.name %></h2>
+          <p><%= app.description %></p>
+        </a>
+        </div>
+        <button value="<%= app.id %>" href="#" class="visible_false" id="add_remove" style="position: absolute; right: 0; bottom: 0;">
+          Add/Remove
+        </button>
+      </li>
+  <% end %>
+</ul>
+
+<button href="#" id="add_apps">Add Apps</button>

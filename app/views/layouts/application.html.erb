@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GlbrcApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style>
+      .visible_false { display: none; }
+      ul {
+          display: flex;
+          padding: 0;
+          list-style: none;
+      }
+      ul > li {
+          width: 15%;
+          height: 145px;
+          display: inline-block;
+          background-color: #D3D3D3;
+          text-align: center;
+          margin: 3px;
+          position: relative;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+      $( function() {
+        $( "#sortable" ).sortable({
+          update: function(e, ui){
+            Rails.ajax({
+              url: $(this).data('url'),
+              type: 'PATCH',
+              data: $(this).sortable('serialize'),
+            });
+          }
+        });
+      });
+      
+      $(function() {
+        $('button#add_apps').click(function(event){
+          event.preventDefault();
+          $('.visible_false').toggle();
+        });
+      }); 
+      
+      $(function() {
+        $('button#add_remove').click(function(event){
+          event.preventDefault();
+            Rails.ajax({
+              url: '/users/add',
+              type: 'PATCH',
+              data: {link_id: $('button#add_remove').val() },
+            });
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>
+
+

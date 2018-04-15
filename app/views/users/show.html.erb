@@ -1,4 +1,5 @@
 <h1>Welcome <%= @user.login %></h1>
+<%= link_to "Log out", logout_path, method: :delete, style: 'float:right; margin-right:50px' %>
 
 <ul id="sortable" class="list-group" data-url="<%= sort_users_path %>">
   <% @apps.each do |app| %>
@@ -15,4 +16,4 @@
   <% end %>
 </ul>
 
-<button href="#" id="add_apps">Add Apps</button>
+<button href="#" id="add_apps" class="btn btn-primary">Add Apps</button>
